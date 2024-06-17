@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  box-sizing: border-box;
+}
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+.container {
+  flex-grow: 1;
+  margin: 0 auto;
+  position: relative;
+}
+.tabs ul li a {
+  color: #94febf;
+  font-weight: 700;
+  position: relative;
+  z-index: 1;
+  border: solid #e42763;
+  border-width: 1px 1px 0;
+  background-color: #1f0e14;
+  transition:
+    color 0.15s ease-in-out,
+    background-color 0.15s ease-in-out;
+  padding: 0.68rem 1.25rem;
+  align-items: center;
+  border-bottom: 0 solid #393939;
+  color: #eee;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0;
+  padding: 0.5em 1em;
+  vertical-align: top;
+}
+
+.tabs ul li:first-child a {
+  margin-right: 1.75rem;
+  border-top-left-radius: 4px;
+  border-right-width: 0;
+  padding-left: 1.75rem;
+}
+.tabs ul li a:after,
+.tabs ul li a:before {
+  position: absolute;
+  background-color: #1f0e14;
+  transform-origin: bottom left;
+  width: 1.5rem;
+  border: solid #e42763;
+  border-width: 1px 1px 0;
+  top: -1px;
+  bottom: 0;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.tabs ul li:first-child a:after {
+  content: "";
+  right: -1.5rem;
+  transform: skewX(20deg);
+  border-left: none;
+  border-top-right-radius: 4px;
+}
+
+.tabs ul li:last-child a:before {
+  position: absolute;
+  background-color: #1f0e14;
+  transform-origin: bottom left;
+  width: 1.5rem;
+  border: solid #e42763;
+  border-width: 1px 1px 0;
+  top: -1px;
+  bottom: 0;
+  transition: background-color 0.15s ease-in-out;
+  content: "";
+  left: -1.5rem;
+  transform: skewX(-20deg);
+  border-right: none;
+  border-top-left-radius: 4px;
+}
+.tabs ul li:first-child a:hover:after {
+  --tw-bg-opacity: 1;
+  background-color: rgb(190 24 93 / var(--tw-bg-opacity));
+}
+.tabs ul li:last-child a:hover:before {
+  --tw-bg-opacity: 1;
+  background-color: rgb(190 24 93 / var(--tw-bg-opacity));
+}
+.content {
+  display: none;
+  height: 100%;
+  width: 100%;
+}
+.active-content {
+  display: block;
+}
