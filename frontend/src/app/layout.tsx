@@ -3,6 +3,7 @@ import { Inconsolata } from "next/font/google"
 import "./globals.css"
 import { StarknetProvider } from "./provider"
 import { Toaster } from "react-hot-toast"
+import { AntdRegistry } from '@ant-design/nextjs-registry';
 
 const inconsolata = Inconsolata({ subsets: ["latin"] })
 
@@ -21,7 +22,9 @@ export default function RootLayout({
       <body
         className={`${inconsolata.className} dark:bg-black bg-gray-300 dark:text-white transition-all duration-500 ease-in-out`}
       >
-        <StarknetProvider>{children}</StarknetProvider>
+        <StarknetProvider>
+          <AntdRegistry>{children}</AntdRegistry>
+        </StarknetProvider>
         <Toaster />
       </body>
     </html>

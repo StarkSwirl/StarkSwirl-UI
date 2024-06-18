@@ -21,7 +21,9 @@ import {
   SelectValue,
 } from "./ui/select"
 import { toast } from "./ui/use-toast"
-import { Slider } from "./ui/slider"
+// import { Slider } from "./ui/slider"
+import { Slider } from 'antd';
+import type { SliderSingleProps } from 'antd';
 
 const FormSchema = z.object({
   token: z.string({
@@ -29,9 +31,42 @@ const FormSchema = z.object({
   }),
 })
 
+const marks: SliderSingleProps['marks'] = {
+  0: {
+    style: {
+      color: '#ffffff',
+    },
+    label: <p className="text-sm">0.05 </p>,
+  },
+  25: {
+    style: {
+      color: '#ffffff',
+    },
+    label: <p className="text-sm">0.1</p>,
+  },
+  50: {
+    style: {
+      color: '#ffffff',
+    },
+    label: <p className="text-sm">0.5</p>,
+  },
+  75: {
+    style: {
+      color: '#ffffff',
+    },
+    label: <p className="text-sm">1</p>,
+  },
+  100: {
+    style: {
+      color: '#ffffff',
+    },
+    label: <p className="text-sm">1.5</p>,
+  },
+};
 export default function TokenSelect() {
-  const [currentSliderIndex, setCurrentSliderIndex] = useState(0)
-  const ethereumValues: Array<number> = [0.05, 0.1, 0.5, 1, 2.5]
+  // const [currentSliderIndex, setCurrentSliderIndex] = useState(0)
+  const [currentValue, setCurrentValue] = useState(0)
+  // const ethereumValues: Array<number> = [0.05, 0.1, 0.5, 1, 2.5]
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   })
@@ -75,14 +110,16 @@ export default function TokenSelect() {
             </FormItem>
           )}
         />
-        <Slider
+        {/* <Slider
           max={4}
           min={0}
           step={1}
           onValueChange={(value: number[]) => setCurrentSliderIndex(value[0])}
           className="bg-transparent"
-        />
-        current value: {ethereumValues[currentSliderIndex]}
+        /> */}
+        <Slider marks={marks} step={null} defaultValue={20} onChange={(value)=>setCurrentValue(value)} 
+          />
+        <p>current value: {currentValue}</p>
         {/* @ts-ignore */}
         {/* // fix needed color is not being applied */}
         <Button type="submit" className="bg-primary w-full">
