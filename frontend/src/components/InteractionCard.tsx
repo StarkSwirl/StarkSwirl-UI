@@ -40,7 +40,7 @@ export default function InteractionCard() {
         </ul>
       </nav>
       <section
-        className="flex mt-0 flex-col bg-dark h-full border border-primary border-solid"
+        className="flex mt-0 flex-col bg-dark rounded-b-md h-full border border-primary border-solid"
         style={{ padding: "1.5rem 1.5rem 2rem" }}
       >
         <div className={tabIndex === 1 ? "content active-content" : "content"}>

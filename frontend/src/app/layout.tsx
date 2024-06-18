@@ -1,14 +1,14 @@
 import type { Metadata } from "next"
-import { Inter, Inconsolata } from "next/font/google"
+import { Inconsolata } from "next/font/google"
 import "./globals.css"
-import { StarknetProvider } from "@/components/StarknetProvider"
+import { StarknetProvider } from "./provider"
 import { Toaster } from "react-hot-toast"
 
 const inconsolata = Inconsolata({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "Starknet Scaffold",
-  description: "Created with love",
+  title: "StarkSwirl",
+  description: "Created with zkSTARKs",
 }
 
 export default function RootLayout({

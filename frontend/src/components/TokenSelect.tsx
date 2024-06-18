@@ -31,7 +31,7 @@ const FormSchema = z.object({
 
 export default function TokenSelect() {
   const [currentSliderIndex, setCurrentSliderIndex] = useState(0)
-  const ethereumValues: Array<number> = [0.05, 0.1, 0.5, 1]
+  const ethereumValues: Array<number> = [0.05, 0.1, 0.5, 1, 2.5]
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   })
@@ -61,7 +61,7 @@ export default function TokenSelect() {
               <FormLabel>Token</FormLabel>
               <Select  onValueChange={field.onChange} defaultValue="Eth">
                 <FormControl>
-                  <SelectTrigger className="border-primary ">
+                  <SelectTrigger className="border-primary focus:outline-none focus:shadow-none active:outline-none shadow-none outline-none">
                     <SelectValue defaultValue="ETH" placeholder="" />
                   </SelectTrigger>
                 </FormControl>
@@ -76,7 +76,7 @@ export default function TokenSelect() {
           )}
         />
         <Slider
-          max={3}
+          max={4}
           min={0}
           step={1}
           onValueChange={(value: number[]) => setCurrentSliderIndex(value[0])}
