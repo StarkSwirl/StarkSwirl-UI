@@ -26,7 +26,7 @@ body {
   font-weight: 700;
   position: relative;
   z-index: 1;
-  border: solid #e42763;
+  border: solid #AB0055;
   border-width: 1px 1px 0;
   background-color: #1f0e14;
   transition:
@@ -55,7 +55,7 @@ body {
   background-color: #1f0e14;
   transform-origin: bottom left;
   width: 1.5rem;
-  border: solid #e42763;
+  border: solid #AB0055;
   border-width: 1px 1px 0;
   top: -1px;
   bottom: 0;
@@ -67,7 +67,7 @@ body {
   right: -1.5rem;
   transform: skewX(20deg);
   border-left: none;
-  border-top-right-radius: 4px;
+  border-top-right-radius: 5px;
 }
 
 .tabs ul li:last-child a:before {
@@ -75,7 +75,7 @@ body {
   background-color: #1f0e14;
   transform-origin: bottom left;
   width: 1.5rem;
-  border: solid #e42763;
+  border: solid #AB0055;
   border-width: 1px 1px 0;
   top: -1px;
   bottom: 0;
@@ -84,8 +84,9 @@ body {
   left: -1.5rem;
   transform: skewX(-20deg);
   border-right: none;
-  border-top-left-radius: 4px;
+  border-top-left-radius: 5px;
 }
+
 .tabs ul li:first-child a:hover:after {
   --tw-bg-opacity: 1;
   background-color: rgb(190 24 93 / var(--tw-bg-opacity));

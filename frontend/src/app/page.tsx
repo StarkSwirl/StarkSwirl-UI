@@ -1,13 +1,12 @@
-import Image from "next/image";
-import Header from "~/Header";
-import Interactioncard from "./components/Interactioncard";
-import { Inter } from "next/font/google";
+import Image from "next/image"
+import Header from "@/components/Header"
+import InteractionCard from "@/components/InteractionCard"
 
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between py-24 md:p-24">
       <div
-        className="flex flex-col items-center container w-full "
+        className="page-content flex flex-col items-center container w-full "
         style={{ maxWidth: "960px" }}
       >
         <div className="">
@@ -23,10 +22,10 @@ export default function Home() {
             priority
           />
         </div>
-        <div className="w-2/4 mt-20">
-          <Interactioncard />
+        <div className="interactioncard-section w-2/4 mt-20">
+          <InteractionCard />
         </div>
       </div>
     </main>
-  );
+  )
 }

@@ -1,7 +1,7 @@
 import { useContractRead } from "@starknet-react/core";
 import { useEffect, useState } from "react";
 import { ETH_SEPOLIA, STRK_SEPOLIA } from "../utils/constant";
-import Erc20Abi from "../abi/token.abi.json";
+import Erc20Abi from "@/abi/token.abi.json";
 import { formatCurrency } from "../utils/currency";
 
 type Props = {

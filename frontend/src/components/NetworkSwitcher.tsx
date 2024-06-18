@@ -3,20 +3,20 @@
 import * as React from "react";
 import { Check, ChevronsUpDown } from "lucide-react";
 import { useNetwork } from "@starknet-react/core";
-import { Button } from "@/app/components/ui/button";
+import { Button } from "@/components/ui/button";
 import {
   Command,
   CommandEmpty,
   CommandGroup,
   CommandInput,
   CommandItem,
-} from "@/app/components/ui/command";
+} from "@/components/ui/command";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/app/components/ui/popover";
-import { cn } from "@/app/lib/utils";
+} from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
 
 const NETWORK_MAPPING: { [key: string]: string } = {
   mainnet: "SN_MAIN",
@@ -43,10 +43,10 @@ export function NetworkSwitcher() {
 
   const switchNetwork = async (newNetworkId: string, networkLabel: string) => {
     try {
-      await window?.starknet?.request({
+      (await (window as any)?.starknet?.request({
         type: "wallet_switchStarknetChain",
         params: { chainId: newNetworkId },
-      });
+      })) as Promise<void>;
 
       console.log(`Switched to network ${networkLabel}`);
       setSelectedNetwork(newNetworkId);

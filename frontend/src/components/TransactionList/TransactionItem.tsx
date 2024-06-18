@@ -1,6 +1,6 @@
 "use client";
 
-import { formatDate } from "@/app/utils/date";
+import { formatDate } from "@/utils/date";
 import { Status, Transaction } from "./TransactionList";
 import { CheckCircle2, Clock, AlertCircle } from "lucide-react";
 
