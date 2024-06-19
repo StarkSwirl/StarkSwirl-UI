@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/nextjs-registry": "^1.0.0",
     "@argent/x-shared": "^1.0.0",
     "@hookform/resolvers": "^3.6.0",
     "@radix-ui/react-dialog": "^1.0.5",
@@ -22,6 +23,7 @@
     "@starknet-react/core": "^2.6.0",
     "@tanstack/react-table": "^8.12.0",
     "@types/react-blockies": "^1.4.4",
+    "antd": "^5.18.2",
     "bignumber.js": "^9.1.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
