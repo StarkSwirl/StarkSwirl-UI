@@ -10,6 +10,7 @@ import { z } from "zod"
 
 const schema = z.object({
   noteInput: z.string(),
+  addressInput: z.string(),
 })
 
 type FormFields = z.infer<typeof schema>
@@ -64,7 +65,7 @@ export default function InteractionCard() {
         style={{ padding: "1.5rem 1.5rem 2rem" }}
       >
         <div className={tabIndex === 1 ? "content active-content" : "content"}>
-          <TokenSelect/>
+          <TokenSelect />
         </div>
         <div className={tabIndex === 2 ? "content active-content" : "content"}>
           <div className="flex">
@@ -75,12 +76,18 @@ export default function InteractionCard() {
                   <InformationIcon />
                 </button>
               </div>
-              <Input
-                placeholder="Please enter your note"
-                {...register("noteInput")}
-              />
+              <div className="flex flex-col gap-9">
+                <Input
+                  placeholder="Please enter your note"
+                  {...register("noteInput")}
+                />
+                <Input
+                  placeholder="Please paste adress here"
+                  {...register("addressInput")}
+                />
+              </div>
               <button
-                className="flex w-full justify-center items-center text-center"
+                className="flex w-full h-10 mt-5 bg-red-600 justify-center items-center text-center hover:bg-red-400 transition-all"
                 disabled={isSubmitting}
                 type="submit"
               >
