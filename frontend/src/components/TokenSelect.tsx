@@ -22,8 +22,8 @@ import {
 } from "./ui/select"
 import { toast } from "./ui/use-toast"
 // import { Slider } from "./ui/slider"
-import { Slider } from 'antd';
-import type { SliderSingleProps } from 'antd';
+import { Slider } from "antd"
+import type { SliderSingleProps } from "antd"
 
 const FormSchema = z.object({
   token: z.string({
@@ -31,38 +31,38 @@ const FormSchema = z.object({
   }),
 })
 
-const marks: SliderSingleProps['marks'] = {
+const marks: SliderSingleProps["marks"] = {
   0: {
     style: {
-      color: '#ffffff',
+      color: "#ffffff",
     },
     label: <p className="text-sm">0.05 </p>,
   },
   25: {
     style: {
-      color: '#ffffff',
+      color: "#ffffff",
     },
     label: <p className="text-sm">0.1</p>,
   },
   50: {
     style: {
-      color: '#ffffff',
+      color: "#ffffff",
     },
     label: <p className="text-sm">0.5</p>,
   },
   75: {
     style: {
-      color: '#ffffff',
+      color: "#ffffff",
     },
     label: <p className="text-sm">1</p>,
   },
   100: {
     style: {
-      color: '#ffffff',
+      color: "#ffffff",
     },
     label: <p className="text-sm">1.5</p>,
   },
-};
+}
 export default function TokenSelect() {
   // const [currentSliderIndex, setCurrentSliderIndex] = useState(0)
   const [currentValue, setCurrentValue] = useState(0)
@@ -94,7 +94,7 @@ export default function TokenSelect() {
           render={({ field }) => (
             <FormItem>
               <FormLabel>Token</FormLabel>
-              <Select  onValueChange={field.onChange} defaultValue="Eth">
+              <Select onValueChange={field.onChange} defaultValue="Eth">
                 <FormControl>
                   <SelectTrigger className="border-primary focus:outline-none focus:shadow-none active:outline-none shadow-none outline-none">
                     <SelectValue defaultValue="ETH" placeholder="" />
@@ -117,8 +117,12 @@ export default function TokenSelect() {
           onValueChange={(value: number[]) => setCurrentSliderIndex(value[0])}
           className="bg-transparent"
         /> */}
-        <Slider marks={marks} step={null} defaultValue={20} onChange={(value)=>setCurrentValue(value)} 
-          />
+        <Slider
+          marks={marks}
+          step={null}
+          defaultValue={20}
+          onChange={(value) => setCurrentValue(value)}
+        />
         <p>current value: {currentValue}</p>
         {/* @ts-ignore */}
         {/* // fix needed color is not being applied */}
