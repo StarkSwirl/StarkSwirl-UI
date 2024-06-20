@@ -21,14 +21,11 @@ import {
   SelectValue,
 } from "./ui/select"
 import { toast } from "./ui/use-toast"
-// import { Slider } from "./ui/slider"
 import { Slider } from "antd"
 import type { SliderSingleProps } from "antd"
 
 const FormSchema = z.object({
-  token: z.string({
-    required_error: "Select a token to connect",
-  }),
+  token: z.string().nonempty("Select a token to connect"),
 })
 
 const marks: SliderSingleProps["marks"] = {
@@ -36,37 +33,46 @@ const marks: SliderSingleProps["marks"] = {
     style: {
       color: "#ffffff",
     },
-    label: <p className="text-sm">0.05 </p>,
+    label: <p className="text-sm">0.05</p>,
   },
   25: {
     style: {
       color: "#ffffff",
     },
-    label: <p className="text-sm">0.1</p>,
+    label: <p className="text-sm">0.5</p>,
   },
   50: {
     style: {
       color: "#ffffff",
     },
-    label: <p className="text-sm">0.5</p>,
+    label: <p className="text-sm">1</p>,
   },
   75: {
     style: {
       color: "#ffffff",
     },
-    label: <p className="text-sm">1</p>,
+    label: <p className="text-sm">5</p>,
   },
   100: {
     style: {
       color: "#ffffff",
     },
-    label: <p className="text-sm">1.5</p>,
+    label: <p className="text-sm">10</p>,
   },
 }
+
+const valueMap = {
+  0: 0.05,
+  25: 0.5,
+  50: 1,
+  75: 5,
+  100: 10,
+} as const
+
 export default function TokenSelect() {
-  // const [currentSliderIndex, setCurrentSliderIndex] = useState(0)
-  const [currentValue, setCurrentValue] = useState(0)
-  // const ethereumValues: Array<number> = [0.05, 0.1, 0.5, 1, 2.5]
+  const [currentValue, setCurrentValue] = useState<0.05 | 0.5 | 1 | 5 | 10>(
+    valueMap[0]
+  )
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
   })
@@ -86,7 +92,7 @@ export default function TokenSelect() {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full space-y-6 relative"
+        className="w-full space-y-6 select-none relative"
       >
         <FormField
           control={form.control}
@@ -96,11 +102,11 @@ export default function TokenSelect() {
               <FormLabel>Token</FormLabel>
               <Select onValueChange={field.onChange} defaultValue="Eth">
                 <FormControl>
-                  <SelectTrigger className="border-primary focus:outline-none focus:shadow-none active:outline-none shadow-none outline-none">
+                  <SelectTrigger className="border-primary focus:outline-none select-none focus:shadow-none active:outline-none shadow-none outline-none">
                     <SelectValue defaultValue="ETH" placeholder="" />
                   </SelectTrigger>
                 </FormControl>
-                <SelectContent className="overflow-hidden absolute z-100 bg-black border-primary">
+                <SelectContent className="overflow-hidden absolute select-none z-100 bg-black border-primary">
                   <SelectItem value="Eth">ETH</SelectItem>
                   <SelectItem value="Starknet">STARK</SelectItem>
                   <SelectItem value="DAI">DAI</SelectItem>
@@ -110,22 +116,15 @@ export default function TokenSelect() {
             </FormItem>
           )}
         />
-        {/* <Slider
-          max={4}
-          min={0}
-          step={1}
-          onValueChange={(value: number[]) => setCurrentSliderIndex(value[0])}
-          className="bg-transparent"
-        /> */}
         <Slider
           marks={marks}
           step={null}
-          defaultValue={20}
-          onChange={(value) => setCurrentValue(value)}
+          defaultValue={0}
+          onChange={(value) =>
+            setCurrentValue(valueMap[value as keyof typeof valueMap])
+          }
         />
-        <p>current value: {currentValue}</p>
-        {/* @ts-ignore */}
-        {/* // fix needed color is not being applied */}
+        <p className="mt-2">current value: {currentValue}</p>
         <Button type="submit" className="bg-primary w-full">
           Connect
         </Button>
