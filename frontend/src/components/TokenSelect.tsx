@@ -1,9 +1,9 @@
-"use client";
-import React, { useState } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
-import { Button } from "./ui/button";
+"use client"
+import React, { useState } from "react"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
+import { Button } from "./ui/button"
 import {
   Form,
   FormControl,
@@ -12,21 +12,21 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "./ui/form";
+} from "./ui/form"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./ui/select";
-import { toast } from "./ui/use-toast";
-import { Slider } from "antd";
-import type { SliderSingleProps } from "antd";
+} from "./ui/select"
+import { toast } from "./ui/use-toast"
+import { Slider } from "antd"
+import type { SliderSingleProps } from "antd"
 
 const FormSchema = z.object({
   token: z.string().nonempty("Select a token to connect"),
-});
+})
 
 const marks: SliderSingleProps["marks"] = {
   0: {
@@ -59,7 +59,7 @@ const marks: SliderSingleProps["marks"] = {
     },
     label: <p className="text-sm">10</p>,
   },
-};
+}
 
 const valueMap = {
   0: 0.05,
@@ -67,13 +67,15 @@ const valueMap = {
   50: 1,
   75: 5,
   100: 10,
-} as const;
+} as const
 
 export default function TokenSelect() {
-  const [currentValue, setCurrentValue] = useState<0.05 | 0.5 | 1 | 5 | 10>(valueMap[0]);
+  const [currentValue, setCurrentValue] = useState<0.05 | 0.5 | 1 | 5 | 10>(
+    valueMap[0]
+  )
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
-  });
+  })
 
   function onSubmit(data: z.infer<typeof FormSchema>) {
     toast({
@@ -83,7 +85,7 @@ export default function TokenSelect() {
           <code className="text-white">{JSON.stringify(data, null, 2)}</code>
         </pre>
       ),
-    });
+    })
   }
 
   return (
@@ -128,5 +130,5 @@ export default function TokenSelect() {
         </Button>
       </form>
     </Form>
-  );
+  )
 }

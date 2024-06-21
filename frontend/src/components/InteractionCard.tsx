@@ -1,10 +1,31 @@
 "use client"
 
 import React, { useState } from "react"
+import { Input } from "./ui/input"
+import InformationIcon from "@/lib/icons/informationIcon"
+import { zodResolver } from "@hookform/resolvers/zod"
 import TokenSelect from "./TokenSelect"
+import { useForm, SubmitHandler } from "react-hook-form"
+import { z } from "zod"
+
+const schema = z.object({
+  noteInput: z.string(),
+  addressInput: z.string(),
+})
+
+type FormFields = z.infer<typeof schema>
 
 export default function InteractionCard() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<FormFields>({
+    resolver: zodResolver(schema),
+  })
+
   const [tabIndex, setTabIndex] = useState<number>(1)
+  const onSubmit: SubmitHandler<FormFields> = (data) => console.log(data)
 
   // Two children lists, first child list with content cut after and last child with content cut before
   return (
@@ -44,10 +65,36 @@ export default function InteractionCard() {
         style={{ padding: "1.5rem 1.5rem 2rem" }}
       >
         <div className={tabIndex === 1 ? "content active-content" : "content"}>
-          <TokenSelect/>
+          <TokenSelect />
         </div>
         <div className={tabIndex === 2 ? "content active-content" : "content"}>
-          tab2
+          <div className="flex">
+            <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
+              <div className="flex flex-row gap-3 mb-3">
+                Note
+                <button className="cursor-pointer hover:bg-red-400 hover:rounded-lg transition-all">
+                  <InformationIcon />
+                </button>
+              </div>
+              <div className="flex flex-col gap-9">
+                <Input
+                  placeholder="Please enter your note"
+                  {...register("noteInput")}
+                />
+                <Input
+                  placeholder="Please paste adress here"
+                  {...register("addressInput")}
+                />
+              </div>
+              <button
+                className="flex w-full h-10 mt-5 bg-red-600 justify-center items-center text-center hover:bg-red-400 transition-all"
+                disabled={isSubmitting}
+                type="submit"
+              >
+                {isSubmitting ? "Withdrawal in progress" : "Withdraw"}
+              </button>
+            </form>
+          </div>
         </div>
       </section>
     </div>

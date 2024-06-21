@@ -41,7 +41,7 @@
     "starknetkit": "^1.1.4",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
-    "zod": "^3.23.5"
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^20",
