@@ -29,7 +29,7 @@ export default function InteractionCard() {
 
   // Two children lists, first child list with content cut after and last child with content cut before
   return (
-    <div className="tabs flex flex-col">
+    <div className="tabs flex flex-col w-full">
       <nav className="min-h-14 mb-0 pb-0">
         <ul className="flex items-center justify-between flex-grow-1 flex-shrink-0">
           <li className="m-0 p-0">

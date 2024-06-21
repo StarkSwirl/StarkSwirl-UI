@@ -116,3 +116,56 @@ body {
   --tw-bg-opacity: 1;
   background-color: rgb(162 0 48 / var(--tw-bg-opacity));
 }
+.media {
+  align-items: flex-start;
+  display: flex;
+  text-align: inherit;
+}
+.notification.main-notification .media {
+  align-items: center;
+}
+.message .media,
+.notification .media {
+  padding-top: 0;
+  border: 0;
+}
+.notification.main-notification.is-warning {
+  background-color: #000403;
+  color: #eee;
+  border-color: #ff8a00;
+}
+.notification.is-warning {
+  background-color: #ff8a00;
+  color: #fff;
+}
+.notification.main-notification .media .media-left {
+  position: relative;
+  align-self: stretch;
+  display: inline-flex;
+  align-items: center;
+}
+.media-left {
+  margin-right: 1rem;
+}
+.media-left,
+.media-right {
+  flex-basis: auto;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+.notification.main-notification.is-warning .media .media-left:after {
+  background-color: #1a1203;
+  border-right: 1px solid #ff8a00;
+}
+.notification.main-notification .media .media-left:after {
+  content: "";
+  position: absolute;
+  transform: skewX(20deg);
+  background-color: #1d1d1d;
+  border-right: 1px solid #393939;
+  top: -1px;
+  bottom: -1px;
+  border-top-right-radius: 2px;
+  left: -50%;
+  right: -0.2rem;
+}
