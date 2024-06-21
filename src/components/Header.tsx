@@ -2,12 +2,12 @@
 import AddressBar, { UserModal } from "./AddressBar";
 import { useEffect, useRef, useState } from "react";
 import { useConnect, useAccount } from "@starknet-react/core";
-import { LibraryBig } from "lucide-react";
 import TransactionModal from "./TransactionList/TransactionModal";
 import useTheme from "../hooks/useTheme";
 import ThemeSwitch from "./Theme";
 import NetworkSwitcher from "./NetworkSwitcher";
 import ConnectModal from "./ConnectModal";
+import Link from "next/link";
 
 const Header = () => {
   const { address } = useAccount();
@@ -74,7 +74,7 @@ const Header = () => {
         ),
       });
     }
-  }, [connectors]);
+  }, [connectors]);// eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (openConnectModal) {
@@ -93,9 +93,9 @@ const Header = () => {
     <>
       <header
         ref={dropdownRef}
-        className="w-full fixed backdrop-blur-2xl dark:border-neutral-800 lg:bg-gray-200 lg:dark:bg-zinc-800/50 left-0 top-0  z-10 flex flex-wrap gap-4 py-2 px-4 md:py-4 md:px-10  justify-between items-center"
+        className="w-full fixed backdrop-blur-2xl dark:border-neutral-800 lg:bg-gray-200 lg:dark:bg-zinc-800/50 left-0 top-0 flex flex-wrap gap-4 py-2 px-4 md:py-4 md:px-10 z-30 justify-between items-center"
       >
-        
+
         <span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -103,19 +103,25 @@ const Header = () => {
             width="200"
             height="40"
             className="md:text-[1.2em]"
-          >
+          ><Link href="/">
             <text
               x="10"
               y="30"
               fontFamily="Cursive, sans-serif"
               fill={`${theme === "dark" ? "white" : "black"}`}
             >
-              starkswirl
+              StarkSwirl
             </text>
+            </Link>
           </svg>
         </span>
 
         <div className="hidden md:flex gap-8">
+          <div className="flex items-center gap-4 text-lg font-medium rounded-lg px-4 py-2 hover:text-primary hover:bg-zinc-900">
+            <Link href="/interaction">
+                App
+            </Link>
+            </div>
           {address ? (
             <div className="flex justify-end">
               <AddressBar setOpenConnectedModal={setOpenConnectedModal} />

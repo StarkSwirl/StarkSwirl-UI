@@ -5,6 +5,7 @@ import { StarknetProvider } from "./provider"
 import { Toaster } from "react-hot-toast"
 import { AntdRegistry } from '@ant-design/nextjs-registry';
 import { ConfigProvider } from "antd";
+import Header from "@/components/Header";
 
 const inconsolata = Inconsolata({ subsets: ["latin"] })
 
@@ -43,6 +44,7 @@ export default function RootLayout({
           }}
           >
             <AntdRegistry>
+              <Header />
               {children}
             </AntdRegistry>
           </ConfigProvider>

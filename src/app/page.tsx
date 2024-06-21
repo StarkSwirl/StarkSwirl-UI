@@ -1,29 +1,27 @@
-import Image from "next/image"
-import Header from "@/components/Header"
-import InteractionCard from "@/components/InteractionCard"
+import { EvervaultCard } from "@/components/ui/evervault-card"
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between py-24 md:p-24">
+    <main className="flex min-h-screen flex-col items-center justify-between">
       <div
         className="page-content flex flex-col items-center container w-full "
         style={{ maxWidth: "960px" }}
       >
-        <div className="">
-          <Header />
-        </div>
-        {/* <div className="">
-          <Image
-            src="/starkswirllogo.png"
-            className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70]"
-            alt="StarkSwirl"
-            width={100}
-            height={100}
-            priority
-          />
-        </div> */}
-        <div className="interactioncard-section w-2/4 mt-20">
-          <InteractionCard />
+        <div className="h-screen mt-0 pt-0">
+          <EvervaultCard>
+            <div className="relative h-fit w-fit  rounded-full flex flex-col items-center justify-center text-white font-bold">
+              <div>
+                <div className="absolute w-full h-full bg-white/[0.8] dark:bg-black/[0.8] blur-3xl rounded-full" />
+                <span className="dark:text-white font-extrabold text-black z-30 text-5xl">Mixer Protocol on <span className="dark:text-white">Starknet</span></span>
+              </div>
+              <Link href="/interaction"
+                className="flex w-36 z-30 cursor-pointer h-10 mt-5 rounded-lg bg-primary justify-center items-center text-center hover:bg-red-800 transition-all"
+              >
+                {"Launch App"}
+              </Link>
+          </div>
+          </EvervaultCard>
         </div>
       </div>
     </main>
