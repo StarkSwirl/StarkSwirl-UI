@@ -38,7 +38,7 @@ export default function InteractionCard() {
               className={
                 tabIndex === 1
                   ? "active flex select-none justify-center rounded-tl-md items-center relative mr-7 m-0 pr-7 border bg-primary border-primary border-solid cursor-pointer"
-                  : "flex justify-center select-none rounded-tl-md items-center relative mr-7 m-0 pr-7 border  border-primary border-solid cursor-pointer hover:bg-pink-700"
+                  : "flex justify-center select-none rounded-tl-md items-center relative mr-7 m-0 pr-7 border  border-primary border-solid cursor-pointer hover:bg-primary"
               }
               style={{ fontSize: "1.35rem" }}
             >
@@ -51,7 +51,7 @@ export default function InteractionCard() {
               className={
                 tabIndex === 2
                   ? "active flex select-none justify-center rounded-tr-md items-center relative ml-7 m-0 pl-7 border border-primary bg-primary border-solid cursor-pointer"
-                  : "flex justify-center select-none items-center rounded-tr-md relative ml-7 m-0 pl-7 border border-primary border-solid cursor-pointer hover:bg-pink-700"
+                  : "flex justify-center select-none items-center rounded-tr-md relative ml-7 m-0 pl-7 border border-primary border-solid cursor-pointer hover:bg-primary"
               }
               style={{ fontSize: "1.35rem" }}
             >
@@ -70,7 +70,7 @@ export default function InteractionCard() {
         <div className={tabIndex === 2 ? "content active-content" : "content"}>
           <div className="flex">
             <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
-              <div className="flex flex-row gap-3 mb-3">
+              <div className="flex select-none flex-row gap-3 mb-3">
                 Note
                 <button className="cursor-pointer hover:bg-red-400 hover:rounded-lg transition-all">
                   <InformationIcon />
@@ -87,7 +87,7 @@ export default function InteractionCard() {
                 />
               </div>
               <button
-                className="flex w-full h-10 mt-5 bg-red-600 justify-center items-center text-center hover:bg-red-400 transition-all"
+                className="flex w-full select-none h-10 mt-5 bg-primary justify-center items-center text-center hover:bg-rose-500 transition-all"
                 disabled={isSubmitting}
                 type="submit"
               >

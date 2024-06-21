@@ -28,14 +28,14 @@ export default function RootLayout({
           theme={{
             components: {
               Slider: {
-                trackBg: "#8C0046",
-                trackHoverBg: "#AB0055",
-                railBg: "#161A54",
-                railHoverBg: "#261A54",
+                trackBg: "#6E001F",
+                trackHoverBg: "#AA0030",
+                railBg: "#0C0C4F",
+                railHoverBg: "#0E0E5C",
                 controlSize: 16,
-                handleActiveColor: "#AB0055",
-                handleColor: "#AB0055",
-                dotActiveBorderColor: "#AB0055",
+                handleActiveColor: "#AA0030",
+                handleColor: "#AA0030",
+                dotActiveBorderColor: "#AA0030",
                 dotSize: 8,
                 fontFamily: "Inconsolata, monospace",
               },

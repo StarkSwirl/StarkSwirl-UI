@@ -12,7 +12,7 @@ export default function Home() {
         <div className="">
           <Header />
         </div>
-        <div className="">
+        {/* <div className="">
           <Image
             src="/starkswirllogo.png"
             className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70]"
@@ -21,7 +21,7 @@ export default function Home() {
             height={100}
             priority
           />
-        </div>
+        </div> */}
         <div className="interactioncard-section w-2/4 mt-20">
           <InteractionCard />
         </div>
