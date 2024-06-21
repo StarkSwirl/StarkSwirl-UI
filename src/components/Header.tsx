@@ -8,6 +8,8 @@ import ThemeSwitch from "./Theme"
 import NetworkSwitcher from "./NetworkSwitcher"
 import ConnectModal from "./ConnectModal"
 import Link from "next/link"
+import Image from "next/image"
+import { usePathname } from "next/navigation";
 
 const Header = () => {
   const { address } = useAccount()
@@ -17,6 +19,9 @@ const Header = () => {
   const [isTransactionModalOpen, setIsModalTransactionOpen] = useState(false)
   const [openMenu, setOpenMenu] = useState(false)
   const dropdownRef = useRef<HTMLDivElement | null>(null)
+
+  const pathname = usePathname();
+
   const toggleModal = () => {
     setOpenConnectModal((prev) => !prev)
   }
@@ -96,6 +101,14 @@ const Header = () => {
         className=" w-full fixed backdrop-blur-2xl dark:border-neutral-800 lg:bg-gray-200 lg:dark:bg-zinc-800/50 left-0 top-0 flex flex-wrap gap-4 py-2 px-4 md:py-4 md:px-10 z-30 justify-center items-center text-center"
       >
         <div className="flex flex-row " style={{ maxWidth: "1000px" }}>
+          <div>
+            <Image
+              src="/starkswirllogo.svg"
+              alt="StarkSwirl Logo"
+              width={40}
+              height={40}
+            />
+          </div>
           <span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -118,7 +131,7 @@ const Header = () => {
           </span>
 
           <div className="hidden md:flex gap-8">
-            <div className="flex items-center gap-4 text-lg font-medium rounded-lg px-4 py-2 hover:text-primary hover:bg-zinc-900">
+            <div className={`flex items-center gap-4 text-lg font-bold rounded-lg px-4 py-0 hover:text-primary ${pathname === "/interaction" ? "text-primary underline underline-offset-3 font-black bg-zinc-900": ""} hover:bg-zinc-900`}>
               <Link href="/interaction">App</Link>
             </div>
             {address ? (

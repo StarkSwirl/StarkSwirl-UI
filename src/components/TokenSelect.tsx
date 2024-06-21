@@ -126,7 +126,7 @@ export default function TokenSelect() {
         />
         <p className="mt-2">current value: {currentValue}</p>
         <button
-                className="flex w-full h-10 mt-5 bg-primary justify-center items-center text-center hover:bg-rose-500 transition-all"
+                className="flex w-full h-10 mt-5 bg-primary justify-center items-center text-center hover:bg-rose-700 transition-all hover:shadow-md hover:shadow-black duration-75 active:bg-primary active:translate-x-0.5 active:translate-y-0.5"
                 type="submit"
               >
                 {"Deposit"}

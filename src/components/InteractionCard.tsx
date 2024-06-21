@@ -87,7 +87,7 @@ export default function InteractionCard() {
                 />
               </div>
               <button
-                className="flex w-full select-none h-10 mt-5 bg-primary justify-center items-center text-center hover:bg-rose-500 transition-all"
+                className="flex w-full select-none h-10 mt-5 bg-primary justify-center items-center text-center hover:bg-rose-500 transition-all hover:shadow-md hover:shadow-black duration-75 active:bg-primary active:translate-x-0.5 active:translate-y-0.5"
                 disabled={isSubmitting}
                 type="submit"
               >

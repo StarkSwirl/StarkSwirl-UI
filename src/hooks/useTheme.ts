@@ -18,7 +18,7 @@ export const useTheme = () => {
       document.documentElement.classList.add(themeConstant.DARK);
       setTheme(themeConstant.DARK);
     } else {
-      setTheme(themeConstant.LIGHT);
+      setTheme(themeConstant.DARK);
     }
   }, []);
 
