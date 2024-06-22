@@ -17,7 +17,7 @@ export const EvervaultCard = ({
   const [randomString, setRandomString] = useState("");
 
   useEffect(() => {
-    let str = generateRandomString(15000);
+    let str = generateRandomString(20000);
     setRandomString(str);
   }, []);
 
@@ -26,7 +26,7 @@ export const EvervaultCard = ({
     mouseX.set(clientX - left);
     mouseY.set(clientY - top);
 
-    const str = generateRandomString(15000);
+    const str = generateRandomString(20000);
     setRandomString(str);
   }
 
@@ -46,7 +46,7 @@ export const EvervaultCard = ({
           mouseY={mouseY}
           randomString={randomString}
         />
-        <div className="relative z-10 flex items-center justify-center">
+        <div className="relative z-10">
           {children}
         </div>
       </div>
@@ -55,7 +55,7 @@ export const EvervaultCard = ({
 };
 
 export function CardPattern({ mouseX, mouseY, randomString }: any) {
-  let maskImage = useMotionTemplate`radial-gradient(250px at ${mouseX}px ${mouseY}px, white, transparent)`;
+  let maskImage = useMotionTemplate`radial-gradient(350px at ${mouseX}px ${mouseY}px, white, transparent)`;
   let style = { maskImage, WebkitMaskImage: maskImage };
 
   return (

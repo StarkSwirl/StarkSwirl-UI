@@ -1,6 +1,6 @@
 import React from "react"
 
-export default function Notificationtab() {
+export default function NotificationTab() {
   return (
     <article className="notification main-notification is-warning">
       <button></button>
