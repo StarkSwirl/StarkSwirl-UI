@@ -2,8 +2,6 @@
 
 import React, { useState } from "react"
 import { Input } from "./ui/input"
-import { Button } from "./ui/button"
-import { useForm, SubmitHandler } from "react-hook-form"
 import { pedersen } from "@scure/starknet" 
 
 export default function SecretGenerator() {
@@ -40,13 +38,13 @@ export default function SecretGenerator() {
               className="flex justify-center select-none rounded-tl-md items-center relative mr-7 m-0 pr-7 border border-primary border-solid cursor-pointer hover:bg-primary"
               style={{ fontSize: "1.35rem" }}
             >
-              <span>Secret</span>
+              <span>Hash</span>
             </a>
           </li>
         </ul>
       </nav>
       <section
-        className="flex mt-0 flex-col bg-dark rounded-b-md h-full border border-secondary border-solid"
+        className="flex mt-0 flex-col bg-dark rounded-b-md h-full border border-primary border-solid"
         style={{ padding: "1.5rem 1.5rem 2rem" }}
       >
         <div className="flex flex-col gap-6">
@@ -69,7 +67,6 @@ export default function SecretGenerator() {
             </button>
           </div>
           <div className="flex flex-col gap-3">
-            {/* <Button className="bg-primary" onClick={getHash}>Generate Pedersen Hash</Button> */}
             <button
                 className="flex w-full h-10 bg-secondary justify-center items-center text-center hover:bg-secondary transition-all hover:shadow-md hover:shadow-black duration-75 active:bg-secondary active:translate-x-0.5 active:translate-y-0.5"
                 onClick={getHash}
@@ -77,9 +74,7 @@ export default function SecretGenerator() {
                 {"generate pedersen hash"}
             </button>
             <Input className="border-secondary" value={hash ?? ""} placeholder="hash" readOnly />
-
           </div>
-          
         </div>
       </section>
     </div>

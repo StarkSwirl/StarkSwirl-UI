@@ -14,7 +14,8 @@ export default function NotificationTab() {
           </span>
         </div>
         <div>
-          <span>this is a warning note</span>
+          {/* <span>this is a warning note</span> */}
+          <span>save your secret</span>
         </div>
       </div>
     </article>

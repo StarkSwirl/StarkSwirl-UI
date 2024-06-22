@@ -1,7 +1,7 @@
-import NotificationTab from "../../components/Notificationtab"
+import NotificationTab from "@/components/NotificationTab"
 import InteractionCard from "@/components/InteractionCard"
-import StatisticsCard from "@/components/StatisticsCard"
-import Secretgenerator from "@/components/SecretGenerator"
+import SecretGenerator from "@/components/SecretGenerator"
+import ProofCard from "@/components/ProofCard"
 
 export default function InteractionPage() {
   return (
@@ -15,11 +15,11 @@ export default function InteractionPage() {
           <InteractionCard />
         </div>
         <div className=" flex flex-row w-2/4 mt-20">
-          <Secretgenerator />
+          <SecretGenerator />
         </div>
       </div>
-      <div className=" flex flex-row w-1/4 mt-20">
-        <StatisticsCard />
+      <div className=" flex flex-row w-full h-96 mt-20">
+        <ProofCard />
       </div>
     </main>
   )
