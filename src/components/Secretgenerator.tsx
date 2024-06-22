@@ -38,7 +38,7 @@ export default function SecretGenerator() {
               className="flex justify-center select-none rounded-tl-md items-center relative mr-7 m-0 pr-7 border border-primary border-solid cursor-pointer hover:bg-primary"
               style={{ fontSize: "1.35rem" }}
             >
-              <span>Hash</span>
+              <span>Note</span>
             </a>
           </li>
         </ul>
@@ -71,7 +71,7 @@ export default function SecretGenerator() {
                 className="flex w-full h-10 bg-secondary justify-center items-center text-center hover:bg-secondary transition-all hover:shadow-md hover:shadow-black duration-75 active:bg-secondary active:translate-x-0.5 active:translate-y-0.5"
                 onClick={getHash}
               >
-                {"generate pedersen hash"}
+                {"generate hash"}
             </button>
             <Input className="border-secondary" value={hash ?? ""} placeholder="hash" readOnly />
           </div>
