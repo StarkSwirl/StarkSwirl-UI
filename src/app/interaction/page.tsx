@@ -1,7 +1,7 @@
 import NotificationTab from "../../components/Notificationtab"
 import InteractionCard from "@/components/InteractionCard"
 import StatisticsCard from "@/components/StatisticsCard"
-import Secretgenerator from "@/components/Secretgenerator"
+import Secretgenerator from "@/components/SecretGenerator"
 
 export default function InteractionPage() {
   return (
