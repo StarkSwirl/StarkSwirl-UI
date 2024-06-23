@@ -1,0 +1,595 @@
+[
+  {
+    "name": "StarkSwirl",
+    "type": "impl",
+    "interface_name": "starkswirl_contracts::interfaces::IStarkSwirl"
+  },
+  {
+    "name": "core::array::Span::<core::felt252>",
+    "type": "struct",
+    "members": [
+      {
+        "name": "snapshot",
+        "type": "@core::array::Array::<core::felt252>"
+      }
+    ]
+  },
+  {
+    "name": "cairo_verifier::vector_commitment::vector_commitment::VectorCommitmentConfig",
+    "type": "struct",
+    "members": [
+      {
+        "name": "height",
+        "type": "core::felt252"
+      },
+      {
+        "name": "n_verifier_friendly_commitment_layers",
+        "type": "core::felt252"
+      }
+    ]
+  },
+  {
+    "name": "cairo_verifier::table_commitment::table_commitment::TableCommitmentConfig",
+    "type": "struct",
+    "members": [
+      {
+        "name": "n_columns",
+        "type": "core::felt252"
+      },
+      {
+        "name": "vector",
+        "type": "cairo_verifier::vector_commitment::vector_commitment::VectorCommitmentConfig"
+      }
+    ]
+  },
+  {
+    "name": "cairo_verifier::air::layouts::recursive::traces::TracesConfig",
+    "type": "struct",
+    "members": [
+      {
+        "name": "original",
+        "type": "cairo_verifier::table_commitment::table_commitment::TableCommitmentConfig"
+      },
+      {
+        "name": "interaction",
+        "type": "cairo_verifier::table_commitment::table_commitment::TableCommitmentConfig"
+      }
+    ]
+  },
+  {
+    "name": "core::array::Span::<cairo_verifier::table_commitment::table_commitment::TableCommitmentConfig>",
+    "type": "struct",
+    "members": [
+      {
+        "name": "snapshot",
+        "type": "@core::array::Array::<cairo_verifier::table_commitment::table_commitment::TableCommitmentConfig>"
+      }
+    ]
+  },
+  {
+    "name": "cairo_verifier::fri::fri_config::FriConfig",
+    "type": "struct",
+    "members": [
+      {
+        "name": "log_input_size",
+        "type": "core::felt252"
+      },
+      {
+        "name": "n_layers",
+        "type": "core::felt252"
+      },
+      {
+        "name": "inner_layers",
+        "type": "core::array::Span::<cairo_verifier::table_commitment::table_commitment::TableCommitmentConfig>"
+      },
+      {
+        "name": "fri_step_sizes",
+        "type": "core::array::Span::<core::felt252>"
+      },
+      {
+        "name": "log_last_layer_degree_bound",
+        "type": "core::felt252"
+      }
+    ]
+  },
+  {
+    "name": "cairo_verifier::proof_of_work::config::ProofOfWorkConfig",
+    "type": "struct",
+    "members": [
+      {
+        "name": "n_bits",
+        "type": "core::integer::u8"
+      }
+    ]
+  },
+  {
+    "name": "cairo_verifier::stark::StarkConfig",
+    "type": "struct",
+    "members": [
+      {
+        "name": "traces",
+        "type": "cairo_verifier::air::layouts::recursive::traces::TracesConfig"
+      },
+      {
+        "name": "composition",
+        "type": "cairo_verifier::table_commitment::table_commitment::TableCommitmentConfig"
+      },
+      {
+        "name": "fri",
+        "type": "cairo_verifier::fri::fri_config::FriConfig"
+      },
+      {
+        "name": "proof_of_work",
+        "type": "cairo_verifier::proof_of_work::config::ProofOfWorkConfig"
+      },
+      {
+        "name": "log_trace_domain_size",
+        "type": "core::felt252"
+      },
+      {
+        "name": "n_queries",
+        "type": "core::felt252"
+      },
+      {
+        "name": "log_n_cosets",
+        "type": "core::felt252"
+      },
+      {
+        "name": "n_verifier_friendly_commitment_layers",
+        "type": "core::felt252"
+      }
+    ]
+  },
+  {
+    "name": "cairo_verifier::air::public_input::SegmentInfo",
+    "type": "struct",
+    "members": [
+      {
+        "name": "begin_addr",
+        "type": "core::felt252"
+      },
+      {
+        "name": "stop_ptr",
+        "type": "core::felt252"
+      }
+    ]
+  },
+  {
+    "name": "cairo_verifier::air::public_memory::AddrValue",
+    "type": "struct",
+    "members": [
+      {
+        "name": "address",
+        "type": "core::felt252"
+      },
+      {
+        "name": "value",
+        "type": "core::felt252"
+      }
+    ]
+  },
+  {
+    "name": "cairo_verifier::air::public_memory::ContinuousPageHeader",
+    "type": "struct",
+    "members": [
+      {
+        "name": "start_address",
+        "type": "core::felt252"
+      },
+      {
+        "name": "size",
+        "type": "core::felt252"
+      },
+      {
+        "name": "hash",
+        "type": "core::felt252"
+      },
+      {
+        "name": "prod",
+        "type": "core::felt252"
+      }
+    ]
+  },
+  {
+    "name": "cairo_verifier::air::public_input::PublicInput",
+    "type": "struct",
+    "members": [
+      {
+        "name": "log_n_steps",
+        "type": "core::felt252"
+      },
+      {
+        "name": "range_check_min",
+        "type": "core::felt252"
+      },
+      {
+        "name": "range_check_max",
+        "type": "core::felt252"
+      },
+      {
+        "name": "layout",
+        "type": "core::felt252"
+      },
+      {
+        "name": "dynamic_params",
+        "type": "core::array::Array::<core::felt252>"
+      },
+      {
+        "name": "segments",
+        "type": "core::array::Array::<cairo_verifier::air::public_input::SegmentInfo>"
+      },
+      {
+        "name": "padding_addr",
+        "type": "core::felt252"
+      },
+      {
+        "name": "padding_value",
+        "type": "core::felt252"
+      },
+      {
+        "name": "main_page",
+        "type": "core::array::Array::<cairo_verifier::air::public_memory::AddrValue>"
+      },
+      {
+        "name": "continuous_page_headers",
+        "type": "core::array::Array::<cairo_verifier::air::public_memory::ContinuousPageHeader>"
+      }
+    ]
+  },
+  {
+    "name": "cairo_verifier::air::layouts::recursive::traces::TracesUnsentCommitment",
+    "type": "struct",
+    "members": [
+      {
+        "name": "original",
+        "type": "core::felt252"
+      },
+      {
+        "name": "interaction",
+        "type": "core::felt252"
+      }
+    ]
+  },
+  {
+    "name": "cairo_verifier::fri::fri::FriUnsentCommitment",
+    "type": "struct",
+    "members": [
+      {
+        "name": "inner_layers",
+        "type": "core::array::Span::<core::felt252>"
+      },
+      {
+        "name": "last_layer_coefficients",
+        "type": "core::array::Span::<core::felt252>"
+      }
+    ]
+  },
+  {
+    "name": "cairo_verifier::proof_of_work::proof_of_work::ProofOfWorkUnsentCommitment",
+    "type": "struct",
+    "members": [
+      {
+        "name": "nonce",
+        "type": "core::integer::u64"
+      }
+    ]
+  },
+  {
+    "name": "cairo_verifier::stark::StarkUnsentCommitment",
+    "type": "struct",
+    "members": [
+      {
+        "name": "traces",
+        "type": "cairo_verifier::air::layouts::recursive::traces::TracesUnsentCommitment"
+      },
+      {
+        "name": "composition",
+        "type": "core::felt252"
+      },
+      {
+        "name": "oods_values",
+        "type": "core::array::Span::<core::felt252>"
+      },
+      {
+        "name": "fri",
+        "type": "cairo_verifier::fri::fri::FriUnsentCommitment"
+      },
+      {
+        "name": "proof_of_work",
+        "type": "cairo_verifier::proof_of_work::proof_of_work::ProofOfWorkUnsentCommitment"
+      }
+    ]
+  },
+  {
+    "name": "cairo_verifier::table_commitment::table_commitment::TableDecommitment",
+    "type": "struct",
+    "members": [
+      {
+        "name": "values",
+        "type": "core::array::Span::<core::felt252>"
+      }
+    ]
+  },
+  {
+    "name": "cairo_verifier::air::layouts::recursive::traces::TracesDecommitment",
+    "type": "struct",
+    "members": [
+      {
+        "name": "original",
+        "type": "cairo_verifier::table_commitment::table_commitment::TableDecommitment"
+      },
+      {
+        "name": "interaction",
+        "type": "cairo_verifier::table_commitment::table_commitment::TableDecommitment"
+      }
+    ]
+  },
+  {
+    "name": "cairo_verifier::vector_commitment::vector_commitment::VectorCommitmentWitness",
+    "type": "struct",
+    "members": [
+      {
+        "name": "authentications",
+        "type": "core::array::Span::<core::felt252>"
+      }
+    ]
+  },
+  {
+    "name": "cairo_verifier::table_commitment::table_commitment::TableCommitmentWitness",
+    "type": "struct",
+    "members": [
+      {
+        "name": "vector",
+        "type": "cairo_verifier::vector_commitment::vector_commitment::VectorCommitmentWitness"
+      }
+    ]
+  },
+  {
+    "name": "cairo_verifier::air::layouts::recursive::traces::TracesWitness",
+    "type": "struct",
+    "members": [
+      {
+        "name": "original",
+        "type": "cairo_verifier::table_commitment::table_commitment::TableCommitmentWitness"
+      },
+      {
+        "name": "interaction",
+        "type": "cairo_verifier::table_commitment::table_commitment::TableCommitmentWitness"
+      }
+    ]
+  },
+  {
+    "name": "cairo_verifier::fri::fri::FriLayerWitness",
+    "type": "struct",
+    "members": [
+      {
+        "name": "leaves",
+        "type": "core::array::Span::<core::felt252>"
+      },
+      {
+        "name": "table_witness",
+        "type": "cairo_verifier::table_commitment::table_commitment::TableCommitmentWitness"
+      }
+    ]
+  },
+  {
+    "name": "core::array::Span::<cairo_verifier::fri::fri::FriLayerWitness>",
+    "type": "struct",
+    "members": [
+      {
+        "name": "snapshot",
+        "type": "@core::array::Array::<cairo_verifier::fri::fri::FriLayerWitness>"
+      }
+    ]
+  },
+  {
+    "name": "cairo_verifier::fri::fri::FriWitness",
+    "type": "struct",
+    "members": [
+      {
+        "name": "layers",
+        "type": "core::array::Span::<cairo_verifier::fri::fri::FriLayerWitness>"
+      }
+    ]
+  },
+  {
+    "name": "cairo_verifier::stark::StarkWitness",
+    "type": "struct",
+    "members": [
+      {
+        "name": "traces_decommitment",
+        "type": "cairo_verifier::air::layouts::recursive::traces::TracesDecommitment"
+      },
+      {
+        "name": "traces_witness",
+        "type": "cairo_verifier::air::layouts::recursive::traces::TracesWitness"
+      },
+      {
+        "name": "composition_decommitment",
+        "type": "cairo_verifier::table_commitment::table_commitment::TableDecommitment"
+      },
+      {
+        "name": "composition_witness",
+        "type": "cairo_verifier::table_commitment::table_commitment::TableCommitmentWitness"
+      },
+      {
+        "name": "fri_witness",
+        "type": "cairo_verifier::fri::fri::FriWitness"
+      }
+    ]
+  },
+  {
+    "name": "cairo_verifier::stark::StarkProof",
+    "type": "struct",
+    "members": [
+      {
+        "name": "config",
+        "type": "cairo_verifier::stark::StarkConfig"
+      },
+      {
+        "name": "public_input",
+        "type": "cairo_verifier::air::public_input::PublicInput"
+      },
+      {
+        "name": "unsent_commitment",
+        "type": "cairo_verifier::stark::StarkUnsentCommitment"
+      },
+      {
+        "name": "witness",
+        "type": "cairo_verifier::stark::StarkWitness"
+      }
+    ]
+  },
+  {
+    "name": "core::integer::u256",
+    "type": "struct",
+    "members": [
+      {
+        "name": "low",
+        "type": "core::integer::u128"
+      },
+      {
+        "name": "high",
+        "type": "core::integer::u128"
+      }
+    ]
+  },
+  {
+    "name": "starkswirl_contracts::interfaces::IStarkSwirl",
+    "type": "interface",
+    "items": [
+      {
+        "name": "deposit",
+        "type": "function",
+        "inputs": [
+          {
+            "name": "commitment",
+            "type": "core::felt252"
+          },
+          {
+            "name": "peaks",
+            "type": "core::array::Span::<core::felt252>"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "name": "withdraw",
+        "type": "function",
+        "inputs": [
+          {
+            "name": "proof",
+            "type": "cairo_verifier::stark::StarkProof"
+          },
+          {
+            "name": "root",
+            "type": "core::felt252"
+          },
+          {
+            "name": "recipient",
+            "type": "core::starknet::contract_address::ContractAddress"
+          },
+          {
+            "name": "nullifier_hash",
+            "type": "core::felt252"
+          }
+        ],
+        "outputs": [],
+        "state_mutability": "external"
+      },
+      {
+        "name": "token_address",
+        "type": "function",
+        "inputs": [],
+        "outputs": [
+          {
+            "type": "core::starknet::contract_address::ContractAddress"
+          }
+        ],
+        "state_mutability": "view"
+      },
+      {
+        "name": "denominator",
+        "type": "function",
+        "inputs": [],
+        "outputs": [
+          {
+            "type": "core::integer::u256"
+          }
+        ],
+        "state_mutability": "view"
+      }
+    ]
+  },
+  {
+    "name": "constructor",
+    "type": "constructor",
+    "inputs": [
+      {
+        "name": "token_address",
+        "type": "core::starknet::contract_address::ContractAddress"
+      },
+      {
+        "name": "denominator",
+        "type": "core::integer::u256"
+      }
+    ]
+  },
+  {
+    "kind": "struct",
+    "name": "starkswirl_contracts::stark_swirl::StarkSwirl::Deposit",
+    "type": "event",
+    "members": [
+      {
+        "kind": "key",
+        "name": "commitment",
+        "type": "core::felt252"
+      },
+      {
+        "kind": "key",
+        "name": "peaks",
+        "type": "core::array::Span::<core::felt252>"
+      },
+      {
+        "kind": "key",
+        "name": "new_index",
+        "type": "core::integer::u32"
+      },
+      {
+        "kind": "key",
+        "name": "new_root",
+        "type": "core::felt252"
+      }
+    ]
+  },
+  {
+    "kind": "struct",
+    "name": "starkswirl_contracts::stark_swirl::StarkSwirl::Withdraw",
+    "type": "event",
+    "members": [
+      {
+        "kind": "key",
+        "name": "nullifier_hash",
+        "type": "core::felt252"
+      }
+    ]
+  },
+  {
+    "kind": "enum",
+    "name": "starkswirl_contracts::stark_swirl::StarkSwirl::Event",
+    "type": "event",
+    "variants": [
+      {
+        "kind": "nested",
+        "name": "Deposit",
+        "type": "starkswirl_contracts::stark_swirl::StarkSwirl::Deposit"
+      },
+      {
+        "kind": "nested",
+        "name": "Withdraw",
+        "type": "starkswirl_contracts::stark_swirl::StarkSwirl::Withdraw"
+      }
+    ]
+  }
+]
