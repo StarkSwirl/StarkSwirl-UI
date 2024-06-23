@@ -7,7 +7,7 @@ import {
 } from '@starknet-react/core';
 import { pedersen, poseidonHash } from '@scure/starknet'; // Ensure you have the correct import path
 import { Contract, uint256 } from 'starknet';
-import StarkSwirlAbi from '../abi/StarkSwirl.json'; // Replace with the correct path to your ABI
+import StarkSwirlAbi from '@/abi/StarkSwirlABI.json'; // Replace with the correct path to your ABI
 
 const useStarkSwirl = () => {
   const { address } = useAccount();
@@ -19,7 +19,7 @@ const useStarkSwirl = () => {
 
   const starkSwirlContract = new Contract(StarkSwirlAbi, contractAddress);
 
-  const [commitment, setCommitment] = useState<bigint | null>(null);
+  const [commitment, setCommitment] = useState<string | null>(null);
   const [nullifierHash, setNullifierHash] = useState<bigint | null>(null);
 
   const { data: denominator, refetch: refetchDenominator } = useContractRead({
@@ -39,8 +39,8 @@ const useStarkSwirl = () => {
     data: depositTxHash,
     error: depositError
   } = useContractWrite({
-    abi: StarkSwirlAbi,
     address: contractAddress,
+    abi: StarkSwirlAbi,
     functionName: 'deposit'
   });
 
@@ -49,13 +49,16 @@ const useStarkSwirl = () => {
     data: withdrawTxHash,
     error: withdrawError
   } = useContractWrite({
-    abi: StarkSwirlAbi,
     address: contractAddress,
+    abi: StarkSwirlAbi,
     functionName: 'withdraw'
   });
 
-  const { status: depositStatus } = useWaitForTransaction({ hash: depositTxHash });
-  const { status: withdrawStatus } = useWaitForTransaction({ hash: withdrawTxHash });
+  const depositHash = depositTxHash?.transaction_hash;
+  const withdrawHash = withdrawTxHash?.transaction_hash;
+
+  const { status: depositStatus } = useWaitForTransaction({ hash: depositHash });
+  const { status: withdrawStatus } = useWaitForTransaction({ hash: withdrawHash });
 
   const generateCommitment = (secret: string, nullifier: string) => {
     const secretBigInt = BigInt(secret);
@@ -66,7 +69,7 @@ const useStarkSwirl = () => {
 
   const generateNullifierHash = (nullifier: string) => {
     const nullifierBigInt = BigInt(nullifier);
-    const nullifierHash = poseidon([nullifierBigInt]);
+    const nullifierHash = poseidonHash([nullifierBigInt]); // Using an array as argument
     setNullifierHash(nullifierHash);
   };
 
