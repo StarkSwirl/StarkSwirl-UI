@@ -7,7 +7,7 @@ This is built using
 - TailwindCSS
 - ShadCn
 - Actertinity UI
-- 
+  
 ## Getting Started
 
 First install the dependencies:
