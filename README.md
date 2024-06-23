@@ -2,11 +2,11 @@
 This is built using
 - NextJS
 - TypeScript
-- starkbet-js
+- starknet-js
 - starknet-react
 - TailwindCSS
 - ShadCn
-- Actertinity UI
+- Aceternity UI
   
 ## Getting Started
 
