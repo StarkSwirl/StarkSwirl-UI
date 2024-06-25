@@ -1,13 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import { 
   useAccount, 
   useContractRead, 
   useContractWrite, 
-  useWaitForTransaction 
+  useWaitForTransaction, 
+  useContract 
 } from '@starknet-react/core';
-import { pedersen, poseidonHash } from '@scure/starknet'; // Ensure you have the correct import path
-import { Contract, uint256 } from 'starknet';
-import StarkSwirlAbi from '@/abi/StarkSwirlABI.json'; // Replace with the correct path to your ABI
+import { pedersen } from '@scure/starknet';
+import StarkSwirlAbi from '@/abi/StarkSwirlABI.json'; 
+import Erc20Abi from '@/abi/token.abi.json';
+import { ETH_SEPOLIA, STRK_SEPOLIA } from "../utils/constant";
 
 const useStarkSwirl = () => {
   const { address } = useAccount();
@@ -17,10 +19,17 @@ const useStarkSwirl = () => {
     throw new Error('Contract address is not defined');
   }
 
-  const starkSwirlContract = new Contract(StarkSwirlAbi, contractAddress);
+  const {contract: starkSwirlContract} = useContract({
+    abi: StarkSwirlAbi,
+    address: contractAddress,
+  });
+
+  const {contract: ethereumTokenContract} = useContract({
+    abi: Erc20Abi,
+    address: ETH_SEPOLIA || "",
+  });
 
   const [commitment, setCommitment] = useState<string | null>(null);
-  const [nullifierHash, setNullifierHash] = useState<bigint | null>(null);
 
   const { data: denominator, refetch: refetchDenominator } = useContractRead({
     abi: StarkSwirlAbi,
@@ -34,31 +43,31 @@ const useStarkSwirl = () => {
     functionName: 'token_address',
   });
 
-  const { 
-    write: deposit, 
-    data: depositTxHash,
-    error: depositError
-  } = useContractWrite({
-    address: contractAddress,
-    abi: StarkSwirlAbi,
-    functionName: 'deposit'
+  const { data: allowanceValue, refetch: refetchAllowanceValue } = useContractRead({
+    abi: Erc20Abi,
+    address: ETH_SEPOLIA || "",
+    functionName: 'allowance',
+    args: [address as string, contractAddress as string],
   });
 
+  const calls = useMemo(() => {
+    if (!commitment || !starkSwirlContract) return [];
+    return starkSwirlContract.populateTransaction['deposit'](commitment);
+  }, [starkSwirlContract, commitment]);
+
   const { 
-    write: withdraw, 
-    data: withdrawTxHash,
-    error: withdrawError
+    writeAsync: deposit, 
+    data: depositTxHash,
+    error: depositError,
+    isPending: isDepositPending,
+    isSuccess: isDepositSuccess,
   } = useContractWrite({
-    address: contractAddress,
-    abi: StarkSwirlAbi,
-    functionName: 'withdraw'
+    calls,
   });
 
   const depositHash = depositTxHash?.transaction_hash;
-  const withdrawHash = withdrawTxHash?.transaction_hash;
 
   const { status: depositStatus } = useWaitForTransaction({ hash: depositHash });
-  const { status: withdrawStatus } = useWaitForTransaction({ hash: withdrawHash });
 
   const generateCommitment = (secret: string, nullifier: string) => {
     const secretBigInt = BigInt(secret);
@@ -67,23 +76,10 @@ const useStarkSwirl = () => {
     setCommitment(commitment);
   };
 
-  const generateNullifierHash = (nullifier: string) => {
-    const nullifierBigInt = BigInt(nullifier);
-    const nullifierHash = poseidonHash([nullifierBigInt]); // Using an array as argument
-    setNullifierHash(nullifierHash);
-  };
-
   const handleDeposit = async (secret: string, nullifier: string, peaks: any) => {
     generateCommitment(secret, nullifier);
     if (commitment) {
-      await deposit({ args: [commitment, peaks] });
-    }
-  };
-
-  const handleWithdraw = async (proof: any, root: string, recipient: string, nullifier: string) => {
-    generateNullifierHash(nullifier);
-    if (nullifierHash) {
-      await withdraw({ args: [proof, root, recipient, nullifierHash] });
+      await deposit();
     }
   };
 
@@ -91,21 +87,17 @@ const useStarkSwirl = () => {
     if (depositStatus === 'success') {
       refetchDenominator();
     }
-    if (withdrawStatus === 'success') {
-      refetchTokenAddress();
-    }
-  }, [depositStatus, withdrawStatus]); //eslint-disable-line
+  }, [depositStatus]); //eslint-disable-line
 
   return {
     address,
     tokenAddress,
     denominator,
     deposit: handleDeposit,
-    withdraw: handleWithdraw,
     depositStatus,
     depositError,
-    withdrawStatus,
-    withdrawError
+    isDepositPending,
+    isDepositSuccess,
   };
 };
 
