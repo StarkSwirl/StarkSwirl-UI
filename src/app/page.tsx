@@ -9,7 +9,7 @@ export default function Home() {
         <div className="flex flex-col">
           <div className="relative h-fit w-fit p-32 rounded-full flex flex-col items-center justify-center text-white font-bold">
             <div className="">
-              <div className="absolute w-full h-full blur-3xl rounded-full" />
+              <div className="absolute w-full h-full blur-3xl rounded-full"/>
               <div className="flex flex-col gap-3 justify-center items-center">
                 <span className="dark:text-white font-extrabold text-black z-30 text-7xl">StarkSwirl</span>
               <span className="dark:text-gray-300 font-medium text-black z-30 text-lg">A privacy preserving token mixer that allow users to use the public blockchain <span className="dark:text-rose-400 font-semibold">Starknet</span>  and keep their privacy.</span>
