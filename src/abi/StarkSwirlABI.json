@@ -16,7 +16,7 @@
         },
         {
             "type": "struct",
-            "name": "cairo_verifier::vector_commitment::vector_commitment::VectorCommitmentConfig",
+            "name": "cairo_verifier::deserialization::vector::VectorCommitmentConfigWithSerde",
             "members": [
                 {
                     "name": "height",
@@ -30,7 +30,7 @@
         },
         {
             "type": "struct",
-            "name": "cairo_verifier::table_commitment::table_commitment::TableCommitmentConfig",
+            "name": "cairo_verifier::deserialization::table::TableCommitmentConfigWithSerde",
             "members": [
                 {
                     "name": "n_columns",
@@ -38,37 +38,27 @@
                 },
                 {
                     "name": "vector",
-                    "type": "cairo_verifier::vector_commitment::vector_commitment::VectorCommitmentConfig"
+                    "type": "cairo_verifier::deserialization::vector::VectorCommitmentConfigWithSerde"
                 }
             ]
         },
         {
             "type": "struct",
-            "name": "cairo_verifier::air::layouts::recursive::traces::TracesConfig",
+            "name": "cairo_verifier::deserialization::traces::TracesConfigWithSerde",
             "members": [
                 {
                     "name": "original",
-                    "type": "cairo_verifier::table_commitment::table_commitment::TableCommitmentConfig"
+                    "type": "cairo_verifier::deserialization::table::TableCommitmentConfigWithSerde"
                 },
                 {
                     "name": "interaction",
-                    "type": "cairo_verifier::table_commitment::table_commitment::TableCommitmentConfig"
+                    "type": "cairo_verifier::deserialization::table::TableCommitmentConfigWithSerde"
                 }
             ]
         },
         {
             "type": "struct",
-            "name": "core::array::Span::<cairo_verifier::table_commitment::table_commitment::TableCommitmentConfig>",
-            "members": [
-                {
-                    "name": "snapshot",
-                    "type": "@core::array::Array::<cairo_verifier::table_commitment::table_commitment::TableCommitmentConfig>"
-                }
-            ]
-        },
-        {
-            "type": "struct",
-            "name": "cairo_verifier::fri::fri_config::FriConfig",
+            "name": "cairo_verifier::deserialization::fri::FriConfigWithSerde",
             "members": [
                 {
                     "name": "log_input_size",
@@ -80,11 +70,11 @@
                 },
                 {
                     "name": "inner_layers",
-                    "type": "core::array::Span::<cairo_verifier::table_commitment::table_commitment::TableCommitmentConfig>"
+                    "type": "core::array::Array::<core::felt252>"
                 },
                 {
                     "name": "fri_step_sizes",
-                    "type": "core::array::Span::<core::felt252>"
+                    "type": "core::array::Array::<core::felt252>"
                 },
                 {
                     "name": "log_last_layer_degree_bound",
@@ -94,33 +84,33 @@
         },
         {
             "type": "struct",
-            "name": "cairo_verifier::proof_of_work::config::ProofOfWorkConfig",
+            "name": "cairo_verifier::deserialization::pow::ProofOfWorkConfigWithSerde",
             "members": [
                 {
                     "name": "n_bits",
-                    "type": "core::integer::u8"
+                    "type": "core::felt252"
                 }
             ]
         },
         {
             "type": "struct",
-            "name": "cairo_verifier::stark::StarkConfig",
+            "name": "cairo_verifier::deserialization::stark::StarkConfigWithSerde",
             "members": [
                 {
                     "name": "traces",
-                    "type": "cairo_verifier::air::layouts::recursive::traces::TracesConfig"
+                    "type": "cairo_verifier::deserialization::traces::TracesConfigWithSerde"
                 },
                 {
                     "name": "composition",
-                    "type": "cairo_verifier::table_commitment::table_commitment::TableCommitmentConfig"
+                    "type": "cairo_verifier::deserialization::table::TableCommitmentConfigWithSerde"
                 },
                 {
                     "name": "fri",
-                    "type": "cairo_verifier::fri::fri_config::FriConfig"
+                    "type": "cairo_verifier::deserialization::fri::FriConfigWithSerde"
                 },
                 {
                     "name": "proof_of_work",
-                    "type": "cairo_verifier::proof_of_work::config::ProofOfWorkConfig"
+                    "type": "cairo_verifier::deserialization::pow::ProofOfWorkConfigWithSerde"
                 },
                 {
                     "name": "log_trace_domain_size",
@@ -142,57 +132,7 @@
         },
         {
             "type": "struct",
-            "name": "cairo_verifier::air::public_input::SegmentInfo",
-            "members": [
-                {
-                    "name": "begin_addr",
-                    "type": "core::felt252"
-                },
-                {
-                    "name": "stop_ptr",
-                    "type": "core::felt252"
-                }
-            ]
-        },
-        {
-            "type": "struct",
-            "name": "cairo_verifier::air::public_memory::AddrValue",
-            "members": [
-                {
-                    "name": "address",
-                    "type": "core::felt252"
-                },
-                {
-                    "name": "value",
-                    "type": "core::felt252"
-                }
-            ]
-        },
-        {
-            "type": "struct",
-            "name": "cairo_verifier::air::public_memory::ContinuousPageHeader",
-            "members": [
-                {
-                    "name": "start_address",
-                    "type": "core::felt252"
-                },
-                {
-                    "name": "size",
-                    "type": "core::felt252"
-                },
-                {
-                    "name": "hash",
-                    "type": "core::felt252"
-                },
-                {
-                    "name": "prod",
-                    "type": "core::felt252"
-                }
-            ]
-        },
-        {
-            "type": "struct",
-            "name": "cairo_verifier::air::public_input::PublicInput",
+            "name": "cairo_verifier::deserialization::stark::PublicInputWithSerde",
             "members": [
                 {
                     "name": "log_n_steps",
@@ -215,8 +155,12 @@
                     "type": "core::array::Array::<core::felt252>"
                 },
                 {
+                    "name": "n_segments",
+                    "type": "core::felt252"
+                },
+                {
                     "name": "segments",
-                    "type": "core::array::Array::<cairo_verifier::air::public_input::SegmentInfo>"
+                    "type": "core::array::Array::<core::felt252>"
                 },
                 {
                     "name": "padding_addr",
@@ -227,18 +171,26 @@
                     "type": "core::felt252"
                 },
                 {
+                    "name": "main_page_len",
+                    "type": "core::felt252"
+                },
+                {
                     "name": "main_page",
-                    "type": "core::array::Array::<cairo_verifier::air::public_memory::AddrValue>"
+                    "type": "core::array::Array::<core::felt252>"
+                },
+                {
+                    "name": "n_continuous_pages",
+                    "type": "core::felt252"
                 },
                 {
                     "name": "continuous_page_headers",
-                    "type": "core::array::Array::<cairo_verifier::air::public_memory::ContinuousPageHeader>"
+                    "type": "core::array::Array::<core::felt252>"
                 }
             ]
         },
         {
             "type": "struct",
-            "name": "cairo_verifier::air::layouts::recursive::traces::TracesUnsentCommitment",
+            "name": "cairo_verifier::deserialization::traces::TracesUnsentCommitmentWithSerde",
             "members": [
                 {
                     "name": "original",
@@ -252,35 +204,35 @@
         },
         {
             "type": "struct",
-            "name": "cairo_verifier::fri::fri::FriUnsentCommitment",
+            "name": "cairo_verifier::deserialization::fri::FriUnsentCommitmentWithSerde",
             "members": [
                 {
                     "name": "inner_layers",
-                    "type": "core::array::Span::<core::felt252>"
+                    "type": "core::array::Array::<core::felt252>"
                 },
                 {
                     "name": "last_layer_coefficients",
-                    "type": "core::array::Span::<core::felt252>"
+                    "type": "core::array::Array::<core::felt252>"
                 }
             ]
         },
         {
             "type": "struct",
-            "name": "cairo_verifier::proof_of_work::proof_of_work::ProofOfWorkUnsentCommitment",
+            "name": "cairo_verifier::deserialization::pow::ProofOfWorkUnsentCommitmentWithSerde",
             "members": [
                 {
                     "name": "nonce",
-                    "type": "core::integer::u64"
+                    "type": "core::felt252"
                 }
             ]
         },
         {
             "type": "struct",
-            "name": "cairo_verifier::stark::StarkUnsentCommitment",
+            "name": "cairo_verifier::deserialization::stark::StarkUnsentCommitmentWithSerde",
             "members": [
                 {
                     "name": "traces",
-                    "type": "cairo_verifier::air::layouts::recursive::traces::TracesUnsentCommitment"
+                    "type": "cairo_verifier::deserialization::traces::TracesUnsentCommitmentWithSerde"
                 },
                 {
                     "name": "composition",
@@ -288,155 +240,139 @@
                 },
                 {
                     "name": "oods_values",
-                    "type": "core::array::Span::<core::felt252>"
+                    "type": "core::array::Array::<core::felt252>"
                 },
                 {
                     "name": "fri",
-                    "type": "cairo_verifier::fri::fri::FriUnsentCommitment"
+                    "type": "cairo_verifier::deserialization::fri::FriUnsentCommitmentWithSerde"
                 },
                 {
                     "name": "proof_of_work",
-                    "type": "cairo_verifier::proof_of_work::proof_of_work::ProofOfWorkUnsentCommitment"
+                    "type": "cairo_verifier::deserialization::pow::ProofOfWorkUnsentCommitmentWithSerde"
                 }
             ]
         },
         {
             "type": "struct",
-            "name": "cairo_verifier::table_commitment::table_commitment::TableDecommitment",
+            "name": "cairo_verifier::deserialization::table::TableDecommitmentWithSerde",
             "members": [
                 {
+                    "name": "n_values",
+                    "type": "core::felt252"
+                },
+                {
                     "name": "values",
-                    "type": "core::array::Span::<core::felt252>"
+                    "type": "core::array::Array::<core::felt252>"
                 }
             ]
         },
         {
             "type": "struct",
-            "name": "cairo_verifier::air::layouts::recursive::traces::TracesDecommitment",
+            "name": "cairo_verifier::deserialization::traces::TracesDecommitmentWithSerde",
             "members": [
                 {
                     "name": "original",
-                    "type": "cairo_verifier::table_commitment::table_commitment::TableDecommitment"
+                    "type": "cairo_verifier::deserialization::table::TableDecommitmentWithSerde"
                 },
                 {
                     "name": "interaction",
-                    "type": "cairo_verifier::table_commitment::table_commitment::TableDecommitment"
+                    "type": "cairo_verifier::deserialization::table::TableDecommitmentWithSerde"
                 }
             ]
         },
         {
             "type": "struct",
-            "name": "cairo_verifier::vector_commitment::vector_commitment::VectorCommitmentWitness",
+            "name": "cairo_verifier::deserialization::vector::VectorCommitmentWitnessWithSerde",
             "members": [
                 {
+                    "name": "n_authentications",
+                    "type": "core::felt252"
+                },
+                {
                     "name": "authentications",
-                    "type": "core::array::Span::<core::felt252>"
+                    "type": "core::array::Array::<core::felt252>"
                 }
             ]
         },
         {
             "type": "struct",
-            "name": "cairo_verifier::table_commitment::table_commitment::TableCommitmentWitness",
+            "name": "cairo_verifier::deserialization::table::TableCommitmentWitnessWithSerde",
             "members": [
                 {
                     "name": "vector",
-                    "type": "cairo_verifier::vector_commitment::vector_commitment::VectorCommitmentWitness"
+                    "type": "cairo_verifier::deserialization::vector::VectorCommitmentWitnessWithSerde"
                 }
             ]
         },
         {
             "type": "struct",
-            "name": "cairo_verifier::air::layouts::recursive::traces::TracesWitness",
+            "name": "cairo_verifier::deserialization::traces::TracesWitnessWithSerde",
             "members": [
                 {
                     "name": "original",
-                    "type": "cairo_verifier::table_commitment::table_commitment::TableCommitmentWitness"
+                    "type": "cairo_verifier::deserialization::table::TableCommitmentWitnessWithSerde"
                 },
                 {
                     "name": "interaction",
-                    "type": "cairo_verifier::table_commitment::table_commitment::TableCommitmentWitness"
+                    "type": "cairo_verifier::deserialization::table::TableCommitmentWitnessWithSerde"
                 }
             ]
         },
         {
             "type": "struct",
-            "name": "cairo_verifier::fri::fri::FriLayerWitness",
-            "members": [
-                {
-                    "name": "leaves",
-                    "type": "core::array::Span::<core::felt252>"
-                },
-                {
-                    "name": "table_witness",
-                    "type": "cairo_verifier::table_commitment::table_commitment::TableCommitmentWitness"
-                }
-            ]
-        },
-        {
-            "type": "struct",
-            "name": "core::array::Span::<cairo_verifier::fri::fri::FriLayerWitness>",
-            "members": [
-                {
-                    "name": "snapshot",
-                    "type": "@core::array::Array::<cairo_verifier::fri::fri::FriLayerWitness>"
-                }
-            ]
-        },
-        {
-            "type": "struct",
-            "name": "cairo_verifier::fri::fri::FriWitness",
+            "name": "cairo_verifier::deserialization::fri::FriWitnessWithSerde",
             "members": [
                 {
                     "name": "layers",
-                    "type": "core::array::Span::<cairo_verifier::fri::fri::FriLayerWitness>"
+                    "type": "core::array::Array::<core::felt252>"
                 }
             ]
         },
         {
             "type": "struct",
-            "name": "cairo_verifier::stark::StarkWitness",
+            "name": "cairo_verifier::deserialization::stark::StarkWitnessWithSerde",
             "members": [
                 {
                     "name": "traces_decommitment",
-                    "type": "cairo_verifier::air::layouts::recursive::traces::TracesDecommitment"
+                    "type": "cairo_verifier::deserialization::traces::TracesDecommitmentWithSerde"
                 },
                 {
                     "name": "traces_witness",
-                    "type": "cairo_verifier::air::layouts::recursive::traces::TracesWitness"
+                    "type": "cairo_verifier::deserialization::traces::TracesWitnessWithSerde"
                 },
                 {
                     "name": "composition_decommitment",
-                    "type": "cairo_verifier::table_commitment::table_commitment::TableDecommitment"
+                    "type": "cairo_verifier::deserialization::table::TableDecommitmentWithSerde"
                 },
                 {
                     "name": "composition_witness",
-                    "type": "cairo_verifier::table_commitment::table_commitment::TableCommitmentWitness"
+                    "type": "cairo_verifier::deserialization::table::TableCommitmentWitnessWithSerde"
                 },
                 {
                     "name": "fri_witness",
-                    "type": "cairo_verifier::fri::fri::FriWitness"
+                    "type": "cairo_verifier::deserialization::fri::FriWitnessWithSerde"
                 }
             ]
         },
         {
             "type": "struct",
-            "name": "cairo_verifier::stark::StarkProof",
+            "name": "cairo_verifier::deserialization::stark::StarkProofWithSerde",
             "members": [
                 {
                     "name": "config",
-                    "type": "cairo_verifier::stark::StarkConfig"
+                    "type": "cairo_verifier::deserialization::stark::StarkConfigWithSerde"
                 },
                 {
                     "name": "public_input",
-                    "type": "cairo_verifier::air::public_input::PublicInput"
+                    "type": "cairo_verifier::deserialization::stark::PublicInputWithSerde"
                 },
                 {
                     "name": "unsent_commitment",
-                    "type": "cairo_verifier::stark::StarkUnsentCommitment"
+                    "type": "cairo_verifier::deserialization::stark::StarkUnsentCommitmentWithSerde"
                 },
                 {
                     "name": "witness",
-                    "type": "cairo_verifier::stark::StarkWitness"
+                    "type": "cairo_verifier::deserialization::stark::StarkWitnessWithSerde"
                 }
             ]
         },
@@ -480,7 +416,7 @@
                     "inputs": [
                         {
                             "name": "proof",
-                            "type": "cairo_verifier::stark::StarkProof"
+                            "type": "cairo_verifier::deserialization::stark::StarkProofWithSerde"
                         },
                         {
                             "name": "root",
@@ -592,4 +528,4 @@
                 }
             ]
         }
-    ]
+]

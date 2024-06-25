@@ -29,7 +29,7 @@ import {
   useContractRead, 
   useContractWrite, 
   useWaitForTransaction, 
-  useContract 
+  useContract
 } from '@starknet-react/core';
 import StarkSwirlAbi from '@/abi/StarkSwirlABI.json';
 
@@ -79,8 +79,8 @@ const valueMap = {
 } as const
 
 export default function TokenSelect() {
-  const [commitment, setCommitment] = useState<string>("")
-
+  const [commitment, setCommitment] = useState<string>("");
+  const [peaks, setPeaks] = useState<bigint[]>([]);
   const { address } = useAccount();
   const contractAddress = process.env.NEXT_PUBLIC_STARK_SWIRL_CONTRACT_ADDRESS || '';
 
@@ -96,24 +96,22 @@ export default function TokenSelect() {
   const [currentValue, setCurrentValue] = useState<0.05 | 0.5 | 1 | 5 | 10>(
     valueMap[0]
   )
+  // const { data: denominator, refetch: refetchDenominator } = useContractRead({
+  //   abi: StarkSwirlAbi,
+  //   address: contractAddress,
+  //   functionName: 'denominator',
+  // });
 
-  const { data: denominator, refetch: refetchDenominator } = useContractRead({
-    abi: StarkSwirlAbi,
-    address: contractAddress,
-    functionName: 'denominator',
-  });
-
-  const { data: tokenAddress, refetch: refetchTokenAddress } = useContractRead({
-    abi: StarkSwirlAbi,
-    address: contractAddress,
-    functionName: 'token_address',
-  });
+  // const { data: tokenAddress, refetch: refetchTokenAddress } = useContractRead({
+  //   abi: StarkSwirlAbi,
+  //   address: contractAddress,
+  //   functionName: 'token_address',
+  // });
   
   const calls = useMemo(() => {
     if (!commitment || !starkSwirlContract) return [];
-    return starkSwirlContract.populateTransaction['deposit'](commitment, [0x05ad24c8c9a0bce5b38152ff9f6a42eca492daf83a27a089eab2ad7476740dc0,0x06e8417e4fe508ffab2262581fa871c86701d5044bfe1f1f88b8ce882cc0691
-]);
-  }, [starkSwirlContract, commitment]);
+    return starkSwirlContract.populateTransaction['deposit'](commitment, peaks);
+  }, [starkSwirlContract, commitment, peaks]);
 
   const { 
     writeAsync: deposit, 
@@ -134,12 +132,12 @@ const handleDeposit = async (commitment: string) => {
       await deposit();
     }
     console.log("commitment: ",commitment)
-    console.log("isDepositPending: ",isDepositPending)
-    console.log("isDepositSuccess: ",isDepositSuccess)
-    console.log("depositTxHash: ",depositTxHash)
+    console.log("isDepositPending: ",await isDepositPending)
+    console.log("isDepositSuccess: ",await isDepositSuccess)
+    console.log("depositTxHash: ",await depositTxHash)
     console.log("depositError: ",depositError)
-    console.log("depositHash: ",depositHash)
-    console.log("depositStatus: ",depositStatus)
+    console.log("depositHash: ",await depositHash)
+    console.log("depositStatus: ",await depositStatus)
   };
 
   const form = useForm<z.infer<typeof FormSchema>>({
@@ -194,13 +192,14 @@ const handleDeposit = async (commitment: string) => {
           }
         />
         <p className="mt-2">current value: {currentValue}</p>
-        <Input className="border-primary" onChange={(e)=> setCommitment(e.target.value)} value={commitment} placeholder="note"/>
+        <Input className="border-primary" onChange={(e)=> setCommitment(e.target.value)} value={commitment} placeholder="commitment"/>
         <button onClick={() => handleDeposit(commitment)}
                 className="flex w-full h-10 mt-5 bg-primary justify-center items-center text-center hover:bg-rose-700 transition-all hover:shadow-md hover:shadow-black duration-75 active:bg-primary active:translate-x-0.5 active:translate-y-0.5"
                 type="button"
               >
                 {"Deposit"}
               </button>
+              <p className='text-xs'>{isDepositPending && <div>Submitting...</div>}</p>
       </form>
     </Form>
   )

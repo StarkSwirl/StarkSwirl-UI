@@ -38,7 +38,7 @@ export default function SecretGenerator() {
               className="flex justify-center select-none rounded-tl-md items-center relative mr-7 m-0 pr-7 border border-primary border-solid cursor-pointer hover:bg-primary"
               style={{ fontSize: "1.35rem" }}
             >
-              <span>Note</span>
+              <span>Commitment</span>
             </a>
           </li>
         </ul>
