@@ -24,10 +24,10 @@ const useStarkSwirl = () => {
     address: contractAddress,
   });
 
-  const {contract: ethereumTokenContract} = useContract({
-    abi: Erc20Abi,
-    address: ETH_SEPOLIA || "",
-  });
+  // const {contract: ethereumTokenContract} = useContract({
+  //   abi: Erc20Abi,
+  //   address: ETH_SEPOLIA || "",
+  // });
 
   const [commitment, setCommitment] = useState<string | null>(null);
 
@@ -43,16 +43,16 @@ const useStarkSwirl = () => {
     functionName: 'token_address',
   });
 
-  const { data: allowanceValue, refetch: refetchAllowanceValue } = useContractRead({
-    abi: Erc20Abi,
-    address: ETH_SEPOLIA || "",
-    functionName: 'allowance',
-    args: [address as string, contractAddress as string],
-  });
+  // const { data: allowanceValue, refetch: refetchAllowanceValue } = useContractRead({
+  //   abi: Erc20Abi,
+  //   address: ETH_SEPOLIA || "",
+  //   functionName: 'allowance',
+  //   args: [address as string, contractAddress as string],
+  // });
 
   const calls = useMemo(() => {
     if (!commitment || !starkSwirlContract) return [];
-    return starkSwirlContract.populateTransaction['deposit'](commitment);
+    return starkSwirlContract.populateTransaction['deposit'](commitment, [0x05ad24c8c9a0bce5b38152ff9f6a42eca492daf83a27a089eab2ad7476740dc0]);
   }, [starkSwirlContract, commitment]);
 
   const { 
@@ -69,15 +69,14 @@ const useStarkSwirl = () => {
 
   const { status: depositStatus } = useWaitForTransaction({ hash: depositHash });
 
-  const generateCommitment = (secret: string, nullifier: string) => {
-    const secretBigInt = BigInt(secret);
-    const nullifierBigInt = BigInt(nullifier);
-    const commitment = pedersen(secretBigInt, nullifierBigInt);
-    setCommitment(commitment);
-  };
+  // const generateCommitment = (secret: string, nullifier: string) => {
+  //   const secretBigInt = BigInt(secret);
+  //   const nullifierBigInt = BigInt(nullifier);
+  //   const commitment = pedersen(secretBigInt, nullifierBigInt);
+  //   setCommitment(commitment);
+  // };
 
-  const handleDeposit = async (secret: string, nullifier: string, peaks: any) => {
-    generateCommitment(secret, nullifier);
+  const handleDeposit = async (commitment: string) => {
     if (commitment) {
       await deposit();
     }
@@ -94,6 +93,7 @@ const useStarkSwirl = () => {
     tokenAddress,
     denominator,
     deposit: handleDeposit,
+    depositTxHash,
     depositStatus,
     depositError,
     isDepositPending,

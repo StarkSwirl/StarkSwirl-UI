@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react"
+import { useEffect, useState, useMemo } from 'react';
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -24,6 +24,14 @@ import { toast } from "./ui/use-toast"
 import { Slider } from "antd"
 import type { SliderSingleProps } from "antd"
 import { Input } from "./ui/input"
+import { 
+  useAccount, 
+  useContractRead, 
+  useContractWrite, 
+  useWaitForTransaction, 
+  useContract 
+} from '@starknet-react/core';
+import StarkSwirlAbi from '@/abi/StarkSwirlABI.json';
 
 const FormSchema = z.object({
   token: z.string().nonempty("Select a token to connect"),
@@ -71,11 +79,68 @@ const valueMap = {
 } as const
 
 export default function TokenSelect() {
+  const [commitment, setCommitment] = useState<string>("")
+
+  const { address } = useAccount();
+  const contractAddress = process.env.NEXT_PUBLIC_STARK_SWIRL_CONTRACT_ADDRESS || '';
+
+  if (!contractAddress) {
+    throw new Error('Contract address is not defined');
+  }
+
+  const {contract: starkSwirlContract} = useContract({
+    abi: StarkSwirlAbi,
+    address: contractAddress,
+  });
+
   const [currentValue, setCurrentValue] = useState<0.05 | 0.5 | 1 | 5 | 10>(
     valueMap[0]
   )
 
-  const [note, setNote] = useState<string>("")
+  const { data: denominator, refetch: refetchDenominator } = useContractRead({
+    abi: StarkSwirlAbi,
+    address: contractAddress,
+    functionName: 'denominator',
+  });
+
+  const { data: tokenAddress, refetch: refetchTokenAddress } = useContractRead({
+    abi: StarkSwirlAbi,
+    address: contractAddress,
+    functionName: 'token_address',
+  });
+  
+  const calls = useMemo(() => {
+    if (!commitment || !starkSwirlContract) return [];
+    return starkSwirlContract.populateTransaction['deposit'](commitment, [0x05ad24c8c9a0bce5b38152ff9f6a42eca492daf83a27a089eab2ad7476740dc0,0x06e8417e4fe508ffab2262581fa871c86701d5044bfe1f1f88b8ce882cc0691
+]);
+  }, [starkSwirlContract, commitment]);
+
+  const { 
+    writeAsync: deposit, 
+    data: depositTxHash,
+    error: depositError,
+    isPending: isDepositPending,
+    isSuccess: isDepositSuccess,
+  } = useContractWrite({
+    calls,
+  });
+
+  const depositHash = depositTxHash?.transaction_hash;
+
+  const { status: depositStatus } = useWaitForTransaction({ hash: depositHash });
+
+const handleDeposit = async (commitment: string) => {
+    if (commitment) {
+      await deposit();
+    }
+    console.log("commitment: ",commitment)
+    console.log("isDepositPending: ",isDepositPending)
+    console.log("isDepositSuccess: ",isDepositSuccess)
+    console.log("depositTxHash: ",depositTxHash)
+    console.log("depositError: ",depositError)
+    console.log("depositHash: ",depositHash)
+    console.log("depositStatus: ",depositStatus)
+  };
 
   const form = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
@@ -129,10 +194,10 @@ export default function TokenSelect() {
           }
         />
         <p className="mt-2">current value: {currentValue}</p>
-        <Input className="border-primary" onChange={(e)=> setNote(e.target.value)} value={note} placeholder="note"/>
-        <button
+        <Input className="border-primary" onChange={(e)=> setCommitment(e.target.value)} value={commitment} placeholder="note"/>
+        <button onClick={() => handleDeposit(commitment)}
                 className="flex w-full h-10 mt-5 bg-primary justify-center items-center text-center hover:bg-rose-700 transition-all hover:shadow-md hover:shadow-black duration-75 active:bg-primary active:translate-x-0.5 active:translate-y-0.5"
-                type="submit"
+                type="button"
               >
                 {"Deposit"}
               </button>
