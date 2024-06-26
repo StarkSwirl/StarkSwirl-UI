@@ -202,9 +202,8 @@ const handleDeposit = async (commitment: string) => {
                 className="flex w-full h-10 mt-5 bg-primary justify-center items-center text-center hover:bg-rose-700 transition-all hover:shadow-md hover:shadow-black duration-75 active:bg-primary active:translate-x-0.5 active:translate-y-0.5"
                 type="button"
         >
-                {"Deposit"}
+                {isDepositPending? "Depositing..." : "Deposit"}
               </button>
-              <p className='text-xs'>{isDepositPending && <div>Submitting...</div>}</p>
       </form>
     </Form>
   )
